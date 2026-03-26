@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swag Universe</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body>
+
+    <!-- ✅ POPUP (Added to cart) -->
+    <div id="popup-msg"></div>
+
+    <!-- ✅ NAVBAR -->
+    <nav class="navbar">
+
+        <div class="logo">Swag Universe</div>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+
+            <li><a href="men.html">Men</a></li>
+            <li><a href="women.html">Women</a></li>
+            <li><a href="kids.html">Kids</a></li>
+
+            <!-- ✅ Cart Icon -->
+            <li>
+                <a href="cart.html" class="cart-icon">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span id="cart-count">0</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- ✅ HERO BANNER -->
+    <header class="banner">
+        <div class="banner-text">
+            <h1>Swag Wear – Style That Speaks</h1>
+            <p>Wear the Swag, Own the Day.</p>
+        </div>
+    </header>
+
+    <!-- ✅ CATEGORY SECTION -->
+    <section class="categories">
+        <h2>Shop by Category</h2>
+
+        <div class="category-cards">
+
+            <a href="men.html" class="card">
+                <img src="assets/images/men.jpg" alt="Men Wear">
+                <h3>Men</h3>
+            </a>
+
+            <a href="women.html" class="card">
+                <img src="assets/images/women.jpg" alt="Women Wear">
+                <h3>Women</h3>
+            </a>
+
+            <a href="kids.html" class="card">
+                <img src="assets/images/kids.jpg" alt="Kids Wear">
+                <h3>Kids</h3>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- ✅ FOOTER -->
+    <footer>
+        <p>&copy; 2025 Swag Universe. All Rights Reserved.</p>
+        <p>Contact: +91 9121492390 | WhatsApp: +91 98765 43210</p>
+    </footer>
+
+    <!-- ✅ JAVASCRIPT (Cart Count + Popup) -->
+    <script>
+        // ✅ Update cart count in navbar
+        function updateCartCount() {
+            let cart = JSON.parse(localStorage.getItem("cartData")) || [];
+            document.getElementById("cart-count").innerText = cart.length;
+        }
+        updateCartCount();
+
+        // ✅ Popup message
+        function showPopup(message) {
+            const popup = document.getElementById("popup-msg");
+            popup.innerText = message;
+            popup.style.display = "block";
+
+            setTimeout(() => {
+                popup.style.display = "none";
+            }, 2000);
+        }
+    </script>
+
+</body>
+</html>
