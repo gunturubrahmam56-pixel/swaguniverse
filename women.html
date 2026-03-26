@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Women | Swag Universe</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Icons -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+</head>
+
+<body>
+
+  <!-- ✅ POPUP MESSAGE -->
+  <div id="popup-msg"></div>
+
+  <!-- ✅ NAVBAR -->
+  <nav class="navbar">
+
+    <!-- Back Button -->
+    <a href="index.html" class="back-btn">
+      <i class="fa-solid fa-arrow-left"></i> Back
+    </a>
+
+    <div class="logo">Swag Universe</div>
+
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="men.html">Men</a></li>
+      <li><a href="women.html">Women</a></li>
+      <li><a href="kids.html">Kids</a></li>
+
+      <!-- ✅ CART ICON -->
+      <li>
+        <a href="cart.html" class="cart-icon">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span id="cart-count">0</span>
+        </a>
+      </li>
+    </ul>
+
+  </nav>
+
+  <!-- ✅ BANNER -->
+  <header class="banner small-banner">
+    <h1>Women’s Collection</h1>
+  </header>
+
+  <!-- ✅ PRODUCTS -->
+  <section class="products">
+    <h2>Elegant & Trendy</h2>
+
+    <div class="product-grid">
+
+      <!-- Evening Dress -->
+      <div class="product">
+        <img src="assets/images/women-dress.jpg" alt="Dress" />
+        <h3>Evening Dress</h3>
+        <p>₹1,299</p>
+
+        <button class="detail-btn">View Details</button>
+        <button class="cart-btn">Add to Cart</button>
+      </div>
+
+      <!-- Casual Top -->
+      <div class="product">
+        <img src="assets/images/women-top.jpg" alt="Top" />
+        <h3>Casual Top</h3>
+        <p>₹899</p>
+
+        <button class="detail-btn">View Details</button>
+        <button class="cart-btn">Add to Cart</button>
+      </div>
+
+      <!-- Skinny Jeans -->
+      <div class="product">
+        <img src="assets/images/women-jeans.jpg" alt="Jeans" />
+        <h3>Skinny Jeans</h3>
+        <p>₹1,199</p>
+
+        <button class="detail-btn">View Details</button>
+        <button class="cart-btn">Add to Cart</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ✅ FOOTER -->
+  <footer>
+    <p>&copy; 2025 Swag Universe. All Rights Reserved.</p>
+  </footer>
+
+  <!-- ✅ JAVASCRIPT -->
+  <script>
+
+    /* ✅ UPDATE CART COUNT */
+    function updateCartCount() {
+      let cart = JSON.parse(localStorage.getItem("cartData")) || [];
+      document.getElementById("cart-count").innerText = cart.length;
+    }
+    updateCartCount();
+
+
+    /* ✅ POPUP MESSAGE */
+    function showPopup(message) {
+      const popup = document.getElementById("popup-msg");
+      popup.innerText = message;
+      popup.style.display = "block";
+
+      setTimeout(() => {
+        popup.style.display = "none";
+      }, 2000);
+    }
+
+
+    /* ✅ ADD TO CART */
+    const cartButtons = document.querySelectorAll(".cart-btn");
+
+    cartButtons.forEach((btn) => {
+      btn.addEventListener("click", function () {
+
+        const product = this.parentElement;
+        const name = product.querySelector("h3").innerText;
+        const price = product.querySelector("p").innerText.replace("₹", "");
+        const image = product.querySelector("img").src;
+
+        let cart = JSON.parse(localStorage.getItem("cartData")) || [];
+        cart.push({ name, price, image, qty: 1 });
+
+        localStorage.setItem("cartData", JSON.stringify(cart));
+
+        updateCartCount();
+        showPopup("✅ Added to Cart");
+      });
+    });
+
+
+    /* ✅ VIEW DETAILS → detail.html */
+    const detailButtons = document.querySelectorAll(".detail-btn");
+
+    detailButtons.forEach((btn) => {
+      btn.addEventListener("click", function () {
+
+        const product = this.parentElement;
+        const name = product.querySelector("h3").innerText;
+        const price = product.querySelector("p").innerText.replace("₹", "");
+        const image = product.querySelector("img").src;
+
+        // Save selected product
+        localStorage.setItem("selectedProduct",
+          JSON.stringify({ name, price, image })
+        );
+
+        window.location.href = "detail.html";
+      });
+    });
+
+  </script>
+
+</body>
+</html>
