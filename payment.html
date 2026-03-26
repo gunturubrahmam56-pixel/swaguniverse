@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment - Swag Wear</title>
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+  <style>
+
+    body {
+      color: #FFD700;
+      background: #A0522D;
+    }
+
+    .payment-box {
+      max-width: 420px;
+      background: #4B2E05;
+      padding: 25px;
+      margin: 40px auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 15px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      margin-bottom: 15px;
+      background: #3a2204;
+      color: #FFD700;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    textarea {
+      height: 80px;
+    }
+
+    .order-summary {
+      text-align: left;
+      margin-top: 15px;
+      padding: 15px;
+      background: #3a2204;
+      border-radius: 8px;
+    }
+
+    .place-order {
+      width: 100%;
+      padding: 14px 0;
+      background: #FFD700;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: 800;
+      cursor: pointer;
+      color: #000;
+      margin-top: 10px;
+      transition: 0.3s ease;
+    }
+
+    .place-order:hover {
+      background: #fff;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ✅ NAVBAR -->
+  <header class="navbar">
+    <a href="detail.html" class="back-btn">
+      <i class="fa-solid fa-arrow-left"></i> Back
+    </a>
+
+    <div class="logo">Swag Universe</div>
+
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="cart.html">Cart</a></li>
+    </ul>
+  </header>
+
+  <!-- ✅ PAYMENT BOX -->
+  <div class="payment-box">
+    <h2>Checkout</h2>
+
+    <h3 id="p-name"></h3>
+    <img id="p-img" src="" style="width:180px;height:200px;border-radius:10px;margin-bottom:10px;">
+    <p id="p-price"></p>
+
+    <h3>Customer Details</h3>
+
+    <input type="text" id="fullname" placeholder="Full Name">
+    <input type="number" id="phone" placeholder="Phone Number">
+
+    <textarea id="address" placeholder="Full Address"></textarea>
+
+    <h3>Payment Method</h3>
+    <select id="paymode">
+      <option value="Cash on Delivery">Cash on Delivery</option>
+      <option value="UPI">UPI</option>
+      <option value="Card Payment">Card Payment</option>
+    </select>
+
+    <div class="order-summary">
+      <h3>Order Summary</h3>
+      <p id="summary-name"></p>
+      <p id="summary-price"></p>
+    </div>
+
+    <button class="place-order" id="placeOrderBtn">Place Order</button>
+  </div>
+
+  <script>
+    /* ✅ Load product from detail.html */
+    let product = JSON.parse(localStorage.getItem("selectedProduct"));
+
+    if (product) {
+      document.getElementById("p-name").innerText = product.name;
+      document.getElementById("p-price").innerText = "Price: ₹" + product.price;
+      document.getElementById("p-img").src = product.image;
+
+      /* Summary */
+      document.getElementById("summary-name").innerText = "Product: " + product.name;
+      document.getElementById("summary-price").innerText = "Amount: ₹" + product.price;
+    }
+
+    /* ✅ Place Order */
+    document.getElementById("placeOrderBtn").addEventListener("click", () => {
+
+      let name = document.getElementById("fullname").value;
+      let phone = document.getElementById("phone").value;
+      let address = document.getElementById("address").value;
+
+      if (name === "" || phone === "" || address === "") {
+        alert("Please fill all fields");
+        return;
+      }
+
+      alert("✅ Order Placed Successfully!\n📦 Your item will be delivered soon.");
+      window.location.href = "index.html";
+    });
+
+  </script>
+
+</body>
+</html>
